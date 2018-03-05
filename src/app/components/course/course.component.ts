@@ -9,7 +9,7 @@ import {Course} from '../../model/course';
 })
 export class CourseComponent implements OnInit {
 
-  courses: Course[];
+  courses: Course[] = [];
 
   constructor(private courseService: CourseService) {
   }
@@ -19,8 +19,7 @@ export class CourseComponent implements OnInit {
   }
 
   getCourses(): void {
-    this.courseService.getCourses()
-      .subscribe(courses => this.courses = courses);
+    this.courseService.getCourses().subscribe(courses => this.courses = courses);
   }
 
 }

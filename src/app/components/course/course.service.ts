@@ -12,7 +12,7 @@ const httpOptions = {
 @Injectable()
 export class CourseService {
 
-  private courseUrl = 'http://localhost:3000/course';
+  private courseUrl = 'http://localhost:3000/courses';
 
   constructor(private http: HttpClient) {
   }

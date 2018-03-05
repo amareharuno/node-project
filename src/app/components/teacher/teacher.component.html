@@ -1,3 +1,12 @@
 <div class="app-teacher">
-  Teachers Page
+  <h1>Teachers Page</h1>
+
+  <ng-container *ngIf="teachers.length; else noTeachers">
+    <div *ngFor="let teacher of teachers">
+      <div>id:{{teacher.id}} name:{{teacher.name}}</div>
+    </div>
+  </ng-container>
+  <ng-template #noTeachers>
+    <div>No teachers found.</div>
+  </ng-template>
 </div>
