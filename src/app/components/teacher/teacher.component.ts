@@ -5,7 +5,9 @@ import {TeacherService} from './teacher.service';
 @Component({
   selector: 'app-teacher',
   templateUrl: './teacher.component.html',
-  styleUrls: ['./teacher.component.less']
+  styleUrls: [
+    './teacher.component.less'
+  ]
 })
 export class TeacherComponent implements OnInit {
 
@@ -21,6 +23,10 @@ export class TeacherComponent implements OnInit {
   getTeachers(): void {
     this.teacherService.getTeachers()
       .subscribe(teachers => this.teachers = teachers);
+  }
+
+  showTeachersPage(): void {
+    // todo
   }
 
 }

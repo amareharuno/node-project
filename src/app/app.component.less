@@ -1,0 +1,35 @@
+@import "shared-styles/colors";
+@import "shared-styles/fonts";
+
+.app-component {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  font-family: @main-font;
+
+  .nav-bar {
+    display: flex;
+    flex-direction: row;
+    background-color: @bg-color__nav-bar;
+    color: @txt-color-nav-bar;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+
+    &__item {
+      display: flex;
+      padding: 15px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: @bg-color-hvr__nav-bar;
+      }
+    }
+  }
+
+  .content {
+    margin-top: 70px;
+    padding: 0 5%;
+  }
+}

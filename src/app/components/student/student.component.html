@@ -1,10 +1,29 @@
 <div class="app-student">
   <h1>Students Page</h1>
-  <ng-container *ngIf="students.length; else noStudents">
-    <div *ngFor="let student of students">
-      <div>id:{{student.id}} name:{{student.name}}</div>
+
+  <div class="entity-list" *ngIf="students.length; else noStudents">
+    <div class="entity-list__header">
+      <div class="entity-list__header__text">id</div>
+      <div class="entity-list__header__text">name</div>
+      <div class="entity-list__header__text">middleName</div>
+      <div class="entity-list__header__text">lastName</div>
+      <div class="entity-list__header__text">email</div>
+      <div class="entity-list__header__text">password</div>
     </div>
-  </ng-container>
+
+    <div class="entity-list__item"
+         *ngFor="let student of students"
+         (click)="showStudentPage()"
+    >
+      <div class="entity-list__item__text">{{student.id}}</div>
+      <div class="entity-list__item__text">{{student.name}}</div>
+      <div class="entity-list__item__text">{{student.middleName}}</div>
+      <div class="entity-list__item__text">{{student.lastName}}</div>
+      <div class="entity-list__item__text">{{student.email}}</div>
+      <div class="entity-list__item__text">{{student.password}}</div>
+    </div>
+  </div>
+
   <ng-template #noStudents>
     <div>No students found.</div>
   </ng-template>

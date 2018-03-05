@@ -5,7 +5,9 @@ import {StudentService} from './student.service';
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
-  styleUrls: ['./student.component.less']
+  styleUrls: [
+    './student.component.less'
+  ]
 })
 export class StudentComponent implements OnInit {
 
@@ -21,6 +23,10 @@ export class StudentComponent implements OnInit {
   getStudents(): void {
     this.studentService.getStudents()
       .subscribe(students => this.students = students);
+  }
+
+  showStudentPage(): void {
+    // todo
   }
 
 }

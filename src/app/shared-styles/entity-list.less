@@ -1,0 +1,32 @@
+@import "colors";
+
+.entity-list {
+  display: flex;
+  flex-direction: column;
+
+  &__header, &__item {
+    display: flex;
+    flex-direction: row;
+    padding: 15px 20px;
+    //margin: 1px 0;
+
+    &__text {
+      display: flex;
+      width: 0;
+      flex-grow: 1;
+    }
+  }
+
+  &__header {
+    background-color: @bg-color__list-header;
+  }
+
+  &__item {
+    cursor: pointer;
+    background-color: @bg-color__list-item;
+    &:hover {
+      background-color: @bg-color-hvr__list-item;
+    }
+  }
+
+}

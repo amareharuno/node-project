@@ -2,10 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {CourseService} from './course.service';
 import {Course} from '../../model/course';
 
-@Component ({
+@Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
-  styleUrls: ['./course.component.less']
+  styleUrls: [
+    './course.component.less'
+  ]
 })
 export class CourseComponent implements OnInit {
 
@@ -22,4 +24,7 @@ export class CourseComponent implements OnInit {
     this.courseService.getCourses().subscribe(courses => this.courses = courses);
   }
 
+  showCoursePage(): void {
+    // todo
+  }
 }
