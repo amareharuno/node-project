@@ -7,10 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class EntityDetailsComponent implements OnInit {
 
-  @Input() title: string;
-  @Input() selectedItem: any;
-  @Input() form: any;
-  @Input() service: any;
+  @Input() visible: boolean;
 
   constructor() {
   }

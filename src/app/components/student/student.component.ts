@@ -12,6 +12,7 @@ import {StudentService} from './student.service';
 export class StudentComponent implements OnInit {
 
   students: Student[];
+  _visibleInfoPanel = false;
 
   constructor(private studentService: StudentService) {
   }
