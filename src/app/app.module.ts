@@ -11,6 +11,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {CourseService} from './components/course/course.service';
 import {StudentService} from './components/student/student.service';
 import {TeacherService} from './components/teacher/teacher.service';
+import {EntityDetailsComponent} from './components/entity-details/entity-details.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import {TeacherService} from './components/teacher/teacher.service';
     AppComponent,
     StudentComponent,
     TeacherComponent,
-    CourseComponent
+    CourseComponent,
+    EntityDetailsComponent
   ],
   providers: [
     CourseService,
