@@ -7,19 +7,19 @@
       <div class="entity-list__header__text">name</div>
       <div class="entity-list__header__text">startDate</div>
       <div class="entity-list__header__text">endDate</div>
-      <div class="entity-list__header__text"></div>
+      <div class="entity-list__header__btn"></div>
     </div>
 
     <div class="entity-list__item"
          *ngFor="let course of _courses"
-         (click)="showCourseDetails(course)"
+         (click)="_showCourseDetails(course)"
     >
       <div class="entity-list__item__id">{{course.id}}</div>
       <div class="entity-list__item__text">{{course.name}}</div>
       <div class="entity-list__item__text">{{course.startDate | date}}</div>
       <div class="entity-list__item__text">{{course.endDate | date}}</div>
-      <div class="entity-list__item__text">
-        <button class="btn-transparent" (click)="_showDetailsPanel = false;">Remove</button>
+      <div class="entity-list__item__btn">
+        <button class="btn-transparent" (click)="_removeItem(course)">Remove</button>
       </div>
     </div>
   </div>

@@ -9,6 +9,7 @@
       <div class="entity-list__header__text">lastName</div>
       <div class="entity-list__header__text">email</div>
       <div class="entity-list__header__text">password</div>
+      <div class="entity-list__header__btn"></div>
     </div>
 
     <div class="entity-list__item"
@@ -21,6 +22,9 @@
       <div class="entity-list__item__text">{{teacher.lastName}}</div>
       <div class="entity-list__item__text">{{teacher.email}}</div>
       <div class="entity-list__item__text">{{teacher.password}}</div>
+      <div class="entity-list__item__btn">
+        <button class="btn-transparent" (click)="_removeItem(course)">Remove</button>
+      </div>
     </div>
   </div>
 

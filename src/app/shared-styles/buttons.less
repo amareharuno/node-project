@@ -40,11 +40,15 @@
   }
 
   &-transparent {
-    padding: 10px 20px;
     font-family: @main-font;
+    font-weight: bold;
     cursor: pointer;
     background-color: transparent;
-    border: 1px solid @main-dark;
+    border: 2px solid @main-dark;
     color: @text-dark;
+    &:hover {
+      border-color: @highlight-warn;
+      color: @highlight-warn;
+    }
   }
 }

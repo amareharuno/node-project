@@ -34,8 +34,12 @@ export class CourseComponent implements OnInit {
     this.teacherService.getTeachers().subscribe(teachers => this._teachers = teachers);
   }
 
-  showCourseDetails(selectedCourse: Course): void {
+  _showCourseDetails(selectedCourse: Course): void {
     this._showDetailsPanel = true;
     this._clickedCourse = selectedCourse;
+  }
+
+  _removeItem(course: Course | number) {
+    // this.courseService.deleteCourse(course)...
   }
 }
