@@ -1,26 +1,26 @@
 <div class="app-course">
   <h1>Courses page</h1>
 
-  <div class="entity-list" *ngIf="courses.length; else noCourses">
+  <div class="entity-list" *ngIf="_courses?.length; else noCourses">
     <div class="entity-list__header">
-      <div class="entity-list__header__text">id</div>
+      <div class="entity-list__header__id">id</div>
       <div class="entity-list__header__text">name</div>
       <div class="entity-list__header__text">startDate</div>
       <div class="entity-list__header__text">endDate</div>
+      <div class="entity-list__header__text"></div>
     </div>
 
     <div class="entity-list__item"
-         *ngFor="let course of courses"
-         (click)="showCoursePage()"
+         *ngFor="let course of _courses"
+         (click)="showCourseDetails(course)"
     >
-      <!--
-        showCoursePage - выплывающее меню, где в полях формы введены данные о курсе
-        и есть кнопки: update, delete и Х (закрыть выплывающее меню)
-      -->
-      <div class="entity-list__item__text">{{course.id}}</div>
+      <div class="entity-list__item__id">{{course.id}}</div>
       <div class="entity-list__item__text">{{course.name}}</div>
       <div class="entity-list__item__text">{{course.startDate | date}}</div>
       <div class="entity-list__item__text">{{course.endDate | date}}</div>
+      <div class="entity-list__item__text">
+        <button class="btn-transparent" (click)="_showDetailsPanel = false;">Remove</button>
+      </div>
     </div>
   </div>
 
@@ -28,11 +28,29 @@
     <div>No courses found.</div>
   </ng-template>
 
-  <app-entity-details
+  <app-details-panel
+    [(visible)]="_showDetailsPanel"
+    [title]="'Course details'"
   >
-    <div class="control">
-      <button>Update</button>
-      <button>Delete</button>
+    <div class="form">
+      <form class="form-col" action="#">
+        <input type="text" name="name" class="form-control" placeholder="Name"
+               value="{{_clickedCourse?.name}}" required autofocus>
+        <input type="date" name="startDate" class="form-control" placeholder="Last Name"
+               value="{{_clickedCourse?.startDate}}" required>
+        <input type="date" name="endDate" class="form-control" placeholder="Middle name"
+               value="{{_clickedCourse?.endDate}}" required>
+
+        <label for="teachers">Select teacher:</label>
+        <select id="teachers" name="teachers" class="form-control">
+          <option *ngFor="let teacher of _teachers" value="light">{{teacher.name}} {{teacher.lastName}}</option>
+        </select>
+      </form>
     </div>
-  </app-entity-details>
+
+    <div class="controls">
+      <button class="btn-primary" type="submit">Update</button>
+      <button class="btn-light" (click)="_showDetailsPanel = false;">Close</button>
+    </div>
+  </app-details-panel>
 </div>

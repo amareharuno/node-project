@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CourseService} from './course.service';
 import {Course} from '../../model/course';
+import {Teacher} from '../../model/teacher';
+import {TeacherService} from '../teacher/teacher.service';
 
 @Component({
   selector: 'app-course',
@@ -11,20 +13,29 @@ import {Course} from '../../model/course';
 })
 export class CourseComponent implements OnInit {
 
-  courses: Course[] = [];
+  _courses: Course[];
+  _showDetailsPanel = false;
+  _clickedCourse: Course;
+  _teachers: Teacher[];
 
-  constructor(private courseService: CourseService) {
+  constructor(private courseService: CourseService, private teacherService: TeacherService) {
   }
 
   ngOnInit(): void {
     this.getCourses();
+    this.getTeachers();
   }
 
   getCourses(): void {
-    this.courseService.getCourses().subscribe(courses => this.courses = courses);
+    this.courseService.getCourses().subscribe(courses => this._courses = courses);
   }
 
-  showCoursePage(): void {
-    // todo
+  getTeachers(): void {
+    this.teacherService.getTeachers().subscribe(teachers => this._teachers = teachers);
+  }
+
+  showCourseDetails(selectedCourse: Course): void {
+    this._showDetailsPanel = true;
+    this._clickedCourse = selectedCourse;
   }
 }

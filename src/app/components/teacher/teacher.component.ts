@@ -11,7 +11,9 @@ import {TeacherService} from './teacher.service';
 })
 export class TeacherComponent implements OnInit {
 
-  teachers: Teacher[];
+  _teachers: Teacher[];
+  _showDetailsPanel = false;
+  _clickedTeacher: Teacher;
 
   constructor(private teacherService: TeacherService) {
   }
@@ -22,11 +24,12 @@ export class TeacherComponent implements OnInit {
 
   getTeachers(): void {
     this.teacherService.getTeachers()
-      .subscribe(teachers => this.teachers = teachers);
+      .subscribe(teachers => this._teachers = teachers);
   }
 
-  showTeachersPage(): void {
-    // todo
+  showTeacherDetails(selectedTeacher: Teacher): void {
+    this._showDetailsPanel = true;
+    this._clickedTeacher = selectedTeacher;
   }
 
 }

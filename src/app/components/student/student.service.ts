@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {Student} from '../../model/student';
 import {catchError} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
+import {Course} from '../../model/course';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -28,6 +29,7 @@ export class StudentService {
 
   /** GET student by id. Will 404 if id not found */
   getStudent(id: number): Observable<Student> {
+    // TODO
     const url = `${this.studentUrl}/${id}`;
     return this.http
       .get<Student>(url)
@@ -36,8 +38,21 @@ export class StudentService {
       );
   }
 
+  getStudentCourses(student: Student | number): Observable<Course[]> {
+    // TODO
+    const id = typeof student === 'number' ? student : student.id;
+    const url = `${this.studentUrl}/courses/${id}`;
+
+    return this.http
+      .get<Course[]>(url)
+      .pipe(
+        catchError(this.handleError(`getStudentCourse id=${id}`, []))
+      );
+  }
+
   /** POST: create a new student to the server */
   addStudent(student: Student): Observable<Student> {
+    // TODO
     return this.http
       .post<Student>(this.studentUrl, student, httpOptions)
       .pipe(
@@ -47,6 +62,7 @@ export class StudentService {
 
   /** DELETE: delete the student from the server */
   deleteStudent(id: number): Observable<Student> {
+    // TODO
     const url = `${this.studentUrl}/${id}`;
 
     return this.http
@@ -57,7 +73,8 @@ export class StudentService {
   }
 
   /** PUT: update the hero on the server */
-  updateAddress(student: Student): Observable<Student> {
+  updateStudent(student: Student): Observable<Student> {
+    // TODO
     return this.http
       .put(this.studentUrl, student, httpOptions)
       .pipe(

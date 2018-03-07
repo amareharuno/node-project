@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Student} from '../../model/student';
 import {StudentService} from './student.service';
+import {Course} from '../../model/course';
 
 @Component({
   selector: 'app-student',
@@ -11,8 +12,11 @@ import {StudentService} from './student.service';
 })
 export class StudentComponent implements OnInit {
 
-  students: Student[];
-  _visibleInfoPanel = false;
+  _students: Student[];
+  _showDetailsPanel = false;
+
+  _selectedStudent: Student;
+  _selectedStudentCourses: Course[];
 
   constructor(private studentService: StudentService) {
   }
@@ -21,13 +25,26 @@ export class StudentComponent implements OnInit {
     this.getStudents();
   }
 
-  getStudents(): void {
+  showStudentDetails(selectedStudent: Student): void {
+    this._showDetailsPanel = true;
+    this._selectedStudent = selectedStudent;
+    this.getStudentCourses(selectedStudent);
+  }
+
+  private getStudents(): void {
     this.studentService.getStudents()
-      .subscribe(students => this.students = students);
+      .subscribe(students => this._students = students);
   }
 
-  showStudentPage(): void {
-    // todo
-  }
+  private getStudentCourses(student: Student | number) {
+    // todo: uncomment later
+    // this.studentService.getStudentCourses(student)
+    //   .subscribe(courses => this._selectedStudentCourses = courses);
 
+    // stub todo: remove it when service will be available
+    const course: Course = new Course(11, 'CourseName', new Date(), new Date(), 1);
+    // this._selectedStudentCourses = [
+    //   course, course, course, course, course, course, course, course, course, course, course, course, course, course
+    // ];
+  }
 }

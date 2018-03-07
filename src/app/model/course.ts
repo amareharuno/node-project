@@ -1,9 +1,15 @@
-import {Teacher} from './teacher';
-
 export class Course {
-  id: string;
+  id: number;
   name: string;
   startDate: Date;
   endDate: Date;
-  teacher: Teacher;
+  teacherId: number;
+
+  constructor(id: number, name: string, startDate: Date, endDate: Date, teacherId: number) {
+    this.id = id;
+    this.name = name;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.teacherId = teacherId;
+  }
 }

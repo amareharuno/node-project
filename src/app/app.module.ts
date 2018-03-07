@@ -11,8 +11,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {CourseService} from './components/course/course.service';
 import {StudentService} from './components/student/student.service';
 import {TeacherService} from './components/teacher/teacher.service';
-import {EntityDetailsComponent} from './components/entity-details/entity-details.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {DetailsPanelComponent} from './components/details-panel/details-panel.component';
 
 @NgModule({
   imports: [
@@ -29,7 +29,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     StudentComponent,
     TeacherComponent,
     CourseComponent,
-    EntityDetailsComponent
+    DetailsPanelComponent
   ],
   providers: [
     CourseService,

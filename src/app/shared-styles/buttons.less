@@ -1,0 +1,50 @@
+@import "fonts";
+@import "colors";
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 10px 0;
+}
+
+.btn {
+  &-primary, &-light {
+    padding: 10px 20px;
+    font-family: @main-font;
+    cursor: pointer;
+    border: 2px solid;
+    margin-left: 10px;
+  }
+
+  &-primary {
+    border-color: @main-dark;
+    background-color: @main-dark;
+    color: @text-light;
+
+    &:hover {
+      background-color: @highlight-dark;
+      border-color: @highlight-dark;
+    }
+  }
+
+  &-light {
+    background-color: white;
+    border-color: @main-dark;
+    color: @main-dark;
+
+    &:hover {
+      border-color: @highlight-dark;
+      color: @highlight-dark;
+    }
+  }
+
+  &-transparent {
+    padding: 10px 20px;
+    font-family: @main-font;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid @main-dark;
+    color: @text-dark;
+  }
+}

@@ -1,9 +1,9 @@
 <div class="app-teacher">
   <h1 class="title">Teachers Page</h1>
 
-  <div class="entity-list" *ngIf="teachers.length; else noTeachers">
+  <div class="entity-list" *ngIf="_teachers?.length; else noTeachers">
     <div class="entity-list__header">
-      <div class="entity-list__header__text">id</div>
+      <div class="entity-list__header__id">id</div>
       <div class="entity-list__header__text">name</div>
       <div class="entity-list__header__text">middleName</div>
       <div class="entity-list__header__text">lastName</div>
@@ -12,10 +12,10 @@
     </div>
 
     <div class="entity-list__item"
-         *ngFor="let teacher of teachers"
-         (click)="showTeachersPage()"
+         *ngFor="let teacher of _teachers"
+         (click)="showTeacherDetails(teacher)"
     >
-      <div class="entity-list__item__text">{{teacher.id}}</div>
+      <div class="entity-list__item__id">{{teacher.id}}</div>
       <div class="entity-list__item__text">{{teacher.name}}</div>
       <div class="entity-list__item__text">{{teacher.middleName}}</div>
       <div class="entity-list__item__text">{{teacher.lastName}}</div>
@@ -28,10 +28,29 @@
     <div>No teachers found.</div>
   </ng-template>
 
-  <app-entity-details>
-    <div class="control">
-      <button>Update</button>
-      <button>Delete</button>
+  <app-details-panel
+    [(visible)]="_showDetailsPanel"
+    [title]="'Teacher details'"
+  >
+    <div class="form">
+      <form class="form-col" action="#">
+        <input type="text" name="name" class="form-control" placeholder="Name"
+               value="{{_clickedTeacher?.name}}" required autofocus>
+        <input type="text" name="lastName" class="form-control" placeholder="Last Name"
+               value="{{_clickedTeacher?.lastName}}" required>
+        <input type="text" name="middleName" class="form-control" placeholder="Middle name"
+               value="{{_clickedTeacher?.middleName}}" required>
+        <input type="text" name="email" class="form-control" placeholder="Email"
+               value="{{_clickedTeacher?.email}}" required>
+        <input type="text" name="password" class="form-control" placeholder="Password"
+               value="{{_clickedTeacher?.password}}" required>
+      </form>
     </div>
-  </app-entity-details>
+
+    <div class="controls">
+      <button class="btn-primary" type="submit">Update</button>
+      <button class="btn-light" (click)="_showDetailsPanel = false;">Close</button>
+      <!--<button class="btn-delete">Delete</button>-->
+    </div>
+  </app-details-panel>
 </div>

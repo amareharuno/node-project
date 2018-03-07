@@ -1,0 +1,7 @@
+<div class="app-entity-details" *ngIf="_visible">
+  <div class="hover" (click)="hidePanel()"></div>
+  <div class="panel">
+    <h1>{{_title}}</h1>
+    <ng-content></ng-content>
+  </div>
+</div>

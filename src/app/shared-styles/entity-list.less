@@ -8,25 +8,34 @@
     display: flex;
     flex-direction: row;
     padding: 15px 20px;
-    //margin: 1px 0;
+    color: @text-dark;
 
-    &__text {
+    &__text, &__id, &__btn {
       display: flex;
       width: 0;
+      padding: 4px;
+    }
+    &__text {
       flex-grow: 1;
+    }
+    &__id {
+      flex-grow: .5;
+    }
+    &__btn {
+      flex-grow: 0;
     }
   }
 
   &__header {
-    background-color: @bg-color__list-header;
+    background-color: @main-medium;
+    font-weight: bold;
   }
 
   &__item {
     cursor: pointer;
-    background-color: @bg-color__list-item;
+    background-color: @main-light;
     &:hover {
-      background-color: @bg-color-hvr__list-item;
+      background-color: @highlight-light;
     }
   }
-
 }

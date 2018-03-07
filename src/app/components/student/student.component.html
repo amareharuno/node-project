@@ -1,21 +1,21 @@
 <div class="app-student">
   <h1>Students Page</h1>
 
-  <div class="entity-list" *ngIf="students.length; else noStudents">
+  <div class="entity-list" *ngIf="_students?.length; else noStudents">
     <div class="entity-list__header">
-      <div class="entity-list__header__text">id</div>
-      <div class="entity-list__header__text">name</div>
-      <div class="entity-list__header__text">middleName</div>
-      <div class="entity-list__header__text">lastName</div>
-      <div class="entity-list__header__text">email</div>
-      <div class="entity-list__header__text">password</div>
+      <div class="entity-list__header__id">Id</div>
+      <div class="entity-list__header__text">Name</div>
+      <div class="entity-list__header__text">Middle Name</div>
+      <div class="entity-list__header__text">Last Name</div>
+      <div class="entity-list__header__text">Email</div>
+      <div class="entity-list__header__text">Password</div>
     </div>
 
     <div class="entity-list__item"
-         *ngFor="let student of students"
-         (click)="showStudentPage()"
+         *ngFor="let student of _students"
+         (click)="showStudentDetails(student)"
     >
-      <div class="entity-list__item__text">{{student.id}}</div>
+      <div class="entity-list__item__id">{{student.id}}</div>
       <div class="entity-list__item__text">{{student.name}}</div>
       <div class="entity-list__item__text">{{student.middleName}}</div>
       <div class="entity-list__item__text">{{student.lastName}}</div>
@@ -28,10 +28,44 @@
     <div>No students found.</div>
   </ng-template>
 
-  <app-entity-details>
-    <div class="control">
-      <button>Update</button>
-      <button>Delete</button>
+  <app-details-panel
+    [(visible)]="_showDetailsPanel"
+    [title]="'Student details'"
+  >
+    <div class="form">
+      <form class="form-col" action="#">
+        <input type="text" name="name" class="form-control" placeholder="Name"
+               value="{{_selectedStudent?.name}}" required autofocus>
+        <input type="text" name="lastName" class="form-control" placeholder="Last Name"
+               value="{{_selectedStudent?.lastName}}" required>
+        <input type="text" name="middleName" class="form-control" placeholder="Middle name"
+               value="{{_selectedStudent?.middleName}}" required>
+        <input type="text" name="email" class="form-control" placeholder="Email"
+               value="{{_selectedStudent?.email}}" required>
+        <input type="text" name="password" class="form-control" placeholder="Password"
+               value="{{_selectedStudent?.password}}" required>
+      </form>
     </div>
-  </app-entity-details>
+
+    <div class="controls">
+      <button class="btn-primary" type="submit">Update</button>
+    </div>
+
+    <ng-container *ngIf="_selectedStudentCourses?.length; else noStudentCourses">
+      <h3>{{_selectedStudent?.name}} {{_selectedStudent?.lastName}} courses:</h3>
+      <div class="course-list">
+        <div class="course-list__item" *ngFor="let course of _selectedStudentCourses; let i = index">
+          {{ i + 1 }}: {{ course.name }} ({{course.startDate | date}} - {{course.endDate | date}})
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #noStudentCourses>
+      {{_selectedStudent?.name}} {{_selectedStudent?.lastName}} has no added courses yet.
+    </ng-template>
+
+    <div class="controls">
+      <button class="btn-primary">Add course</button>
+      <button class="btn-light" (click)="_showDetailsPanel = false;">Close</button>
+    </div>
+  </app-details-panel>
 </div>
