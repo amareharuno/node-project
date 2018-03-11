@@ -15,10 +15,15 @@ export class CourseComponent implements OnInit {
 
   _courses: Course[];
   _showDetailsPanel = false;
+  _showAddPanel = false;
   _clickedCourse: Course;
+  _updatedCourse: Course;
+  _addedCourse: Course;
   _teachers: Teacher[];
 
   constructor(private courseService: CourseService, private teacherService: TeacherService) {
+    this._updatedCourse = new Course();
+    this._addedCourse = new Course();
   }
 
   ngOnInit(): void {
@@ -39,7 +44,19 @@ export class CourseComponent implements OnInit {
     this._clickedCourse = selectedCourse;
   }
 
-  _removeItem(course: Course | number) {
-    // this.courseService.deleteCourse(course)...
+  _addCourse() {
+    this.courseService.addCourse(this._addedCourse).subscribe(() => this.getCourses());
+    this._showAddPanel = false;
   }
+
+  _removeItem(course: Course | number, event: MouseEvent) {
+    this.courseService.deleteCourse(course).subscribe(() => this.getCourses());
+    event.stopPropagation();
+  }
+
+  _updateCourse() {
+    this.courseService.updateCourse(this._clickedCourse.id, this._updatedCourse).subscribe(() => this.getCourses());
+    this._showDetailsPanel = false;
+  }
+
 }

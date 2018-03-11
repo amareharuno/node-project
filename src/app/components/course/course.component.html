@@ -7,7 +7,9 @@
       <div class="entity-list__header__text">name</div>
       <div class="entity-list__header__text">startDate</div>
       <div class="entity-list__header__text">endDate</div>
-      <div class="entity-list__header__btn"></div>
+      <div class="entity-list__header__btn">
+        <button class="btn-light" (click)="_showAddPanel = true;">+</button>
+      </div>
     </div>
 
     <div class="entity-list__item"
@@ -19,7 +21,7 @@
       <div class="entity-list__item__text">{{course.startDate | date}}</div>
       <div class="entity-list__item__text">{{course.endDate | date}}</div>
       <div class="entity-list__item__btn">
-        <button class="btn-transparent" (click)="_removeItem(course)">Remove</button>
+        <button class="btn-transparent" (click)="_removeItem(course, $event)">Remove</button>
       </div>
     </div>
   </div>
@@ -33,24 +35,51 @@
     [title]="'Course details'"
   >
     <div class="form">
-      <form class="form-col" action="#">
+      <form class="form-col" action="#" (ngSubmit)="_updateCourse()" id="courseForm">
         <input type="text" name="name" class="form-control" placeholder="Name"
-               value="{{_clickedCourse?.name}}" required autofocus>
+               value="{{_clickedCourse?.name}}" [(ngModel)]="_updatedCourse.name" required autofocus>
         <input type="date" name="startDate" class="form-control" placeholder="Last Name"
-               value="{{_clickedCourse?.startDate}}" required>
+               value="{{_clickedCourse?.startDate}}" [(ngModel)]="_updatedCourse.startDate" required>
         <input type="date" name="endDate" class="form-control" placeholder="Middle name"
-               value="{{_clickedCourse?.endDate}}" required>
+               value="{{_clickedCourse?.endDate}}" [(ngModel)]="_updatedCourse.endDate" required>
 
         <label for="teachers">Select teacher:</label>
-        <select id="teachers" name="teachers" class="form-control">
-          <option *ngFor="let teacher of _teachers" value="light">{{teacher.name}} {{teacher.lastName}}</option>
+        <select id="teachers" name="teachers" class="form-control" [(ngModel)]="_updatedCourse.teacherId">
+          <option *ngFor="let teacher of _teachers" value="{{teacher.id}}}">{{teacher.name}} {{teacher.lastName}}
+          </option>
         </select>
       </form>
     </div>
 
     <div class="controls">
-      <button class="btn-primary" type="submit">Update</button>
+      <button class="btn-primary" type="submit" form="courseForm">Update</button>
       <button class="btn-light" (click)="_showDetailsPanel = false;">Close</button>
+    </div>
+  </app-details-panel>
+  <app-details-panel
+    [(visible)]="_showAddPanel"
+    [title]="'Add course'"
+  >
+    <div class="form">
+      <form class="form-col" action="#" (ngSubmit)="_addCourse()" id="addCourseForm">
+        <input type="text" name="name" class="form-control" placeholder="Name"
+               [(ngModel)]="_addedCourse.name" required autofocus>
+        <input type="date" name="startDate" class="form-control" placeholder="Last Name"
+               [(ngModel)]="_addedCourse.startDate" required>
+        <input type="date" name="endDate" class="form-control" placeholder="Middle name"
+               [(ngModel)]="_addedCourse.endDate" required>
+
+        <label for="teachersd">Select teacher:</label>
+        <select id="teachersd" name="teachers" class="form-control" [(ngModel)]="_addedCourse.teacherId">
+          <option *ngFor="let teacher of _teachers" value="{{teacher.id}}">{{teacher.name}} {{teacher.lastName}}
+          </option>
+        </select>
+      </form>
+    </div>
+
+    <div class="controls">
+      <button class="btn-primary" type="submit" form="addCourseForm">Add</button>
+      <button class="btn-light" (click)="_showAddPanel = false;">Close</button>
     </div>
   </app-details-panel>
 </div>

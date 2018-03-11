@@ -46,7 +46,8 @@ export class TeacherService {
   }
 
   /** DELETE: delete the teacher from the server */
-  deleteTeacher(id: number): Observable<Teacher> {
+  deleteTeacher(teacher: Teacher | number): Observable<Teacher> {
+    const id = typeof teacher === 'number' ? teacher : teacher.id;
     const url = `${this.teacherUrl}/${id}`;
 
     return this.http
@@ -57,9 +58,9 @@ export class TeacherService {
   }
 
   /** PUT: update the hero on the server */
-  updateAddress(teacher: Teacher): Observable<Teacher> {
+  updateTeacher(id: number, teacher: Teacher): Observable<Teacher> {
     return this.http
-      .put(this.teacherUrl, teacher, httpOptions)
+      .put(`${this.teacherUrl}/${id}`, teacher, httpOptions)
       .pipe(
         catchError(this.handleError<any>('updateTeacher'))
       );

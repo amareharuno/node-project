@@ -41,7 +41,7 @@ export class StudentService {
   getStudentCourses(student: Student | number): Observable<Course[]> {
     // TODO
     const id = typeof student === 'number' ? student : student.id;
-    const url = `${this.studentUrl}/courses/${id}`;
+    const url = `${this.studentUrl}/${id}/courses/`;
 
     return this.http
       .get<Course[]>(url)
@@ -61,8 +61,8 @@ export class StudentService {
   }
 
   /** DELETE: delete the student from the server */
-  deleteStudent(id: number): Observable<Student> {
-    // TODO
+  deleteStudent(student: Student | number): Observable<Student> {
+    const id = typeof student === 'number' ? student : student.id;
     const url = `${this.studentUrl}/${id}`;
 
     return this.http
@@ -73,12 +73,11 @@ export class StudentService {
   }
 
   /** PUT: update the hero on the server */
-  updateStudent(student: Student): Observable<Student> {
-    // TODO
+  updateStudent(id: number, student: Student): Observable<Student> {
     return this.http
-      .put(this.studentUrl, student, httpOptions)
+      .put(`${this.studentUrl}/${id}`, student, httpOptions)
       .pipe(
-        catchError(this.handleError<any>('updateStudent'))
+        catchError(this.handleError<any>('updateCourse'))
       );
   }
 
