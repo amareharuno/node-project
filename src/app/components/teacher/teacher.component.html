@@ -18,12 +18,12 @@
          *ngFor="let teacher of _teachers"
          (click)="showTeacherDetails(teacher)"
     >
-      <div class="entity-list__item__id">{{teacher.id}}</div>
-      <div class="entity-list__item__text">{{teacher.name}}</div>
-      <div class="entity-list__item__text">{{teacher.middleName}}</div>
-      <div class="entity-list__item__text">{{teacher.lastName}}</div>
-      <div class="entity-list__item__text">{{teacher.email}}</div>
-      <div class="entity-list__item__text">{{teacher.password}}</div>
+      <div class="entity-list__item__id">{{teacher?.id}}</div>
+      <div class="entity-list__item__text">{{teacher?.name}}</div>
+      <div class="entity-list__item__text">{{teacher?.middleName}}</div>
+      <div class="entity-list__item__text">{{teacher?.lastName}}</div>
+      <div class="entity-list__item__text">{{teacher?.email}}</div>
+      <div class="entity-list__item__text">{{teacher?.password}}</div>
       <div class="entity-list__item__btn">
         <button class="btn-transparent" (click)="_removeItem(teacher, $event)">Remove</button>
       </div>

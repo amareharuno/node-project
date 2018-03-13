@@ -28,15 +28,34 @@ export class CourseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCourses();
-    this.getTeachers();
   }
 
   getCourses(): void {
-    this.courseService.getCourses().subscribe(courses => this._courses = courses);
+    this.courseService.getCourses().subscribe(courses => {
+      this._courses = courses;
+      this.getTeachers();
+    });
   }
 
   getTeachers(): void {
-    this.teacherService.getTeachers().subscribe(teachers => this._teachers = teachers);
+    this.teacherService.getTeachers().subscribe(teachers => {
+      this._teachers = teachers;
+      this._courses.forEach(course => {
+        course.teacher = this.getTeacherById(course.teacherId);
+      });
+    });
+  }
+
+  private getTeacherById(teacherId: number): Teacher {
+    let foundTeacher: Teacher = new Teacher();
+    this._teachers.forEach(teacher => {
+      if (teacher.id === teacherId) {
+        foundTeacher = teacher;
+        console.log(foundTeacher);
+        return foundTeacher;
+      }
+    });
+    return foundTeacher;
   }
 
   _showCourseDetails(selectedCourse: Course): void {
