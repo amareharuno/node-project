@@ -9,7 +9,9 @@
       <div class="entity-list__header__text">Last Name</div>
       <div class="entity-list__header__text">Email</div>
       <div class="entity-list__header__text">Password</div>
-      <div class="entity-list__header__btn"></div>
+      <div class="entity-list__header__btn">
+        <button class="btn-light" (click)="_showAddPanel = true;">+</button>
+      </div>
     </div>
 
     <div class="entity-list__item"
@@ -23,7 +25,7 @@
       <div class="entity-list__item__text">{{student.email}}</div>
       <div class="entity-list__item__text">{{student.password}}</div>
       <div class="entity-list__item__btn">
-        <button class="btn-transparent" (click)="_removeItem(course)">Remove</button>
+        <button class="btn-transparent" (click)="_removeItem(student, $event)">Remove</button>
       </div>
     </div>
   </div>
@@ -37,22 +39,22 @@
     [title]="'Student details'"
   >
     <div class="form">
-      <form class="form-col" action="#">
+      <form class="form-col" action="#" (ngSubmit)="_updateStudent()" id="studentForm">
         <input type="text" name="name" class="form-control" placeholder="Name"
-               value="{{_selectedStudent?.name}}" required autofocus>
+               value="{{_selectedStudent?.name}}" [(ngModel)]="_updatedStudent.name" required autofocus>
         <input type="text" name="lastName" class="form-control" placeholder="Last Name"
-               value="{{_selectedStudent?.lastName}}" required>
+               value="{{_selectedStudent?.lastName}}" [(ngModel)]="_updatedStudent.lastName" required>
         <input type="text" name="middleName" class="form-control" placeholder="Middle name"
-               value="{{_selectedStudent?.middleName}}" required>
+               value="{{_selectedStudent?.middleName}}" [(ngModel)]="_updatedStudent.middleName" required>
         <input type="text" name="email" class="form-control" placeholder="Email"
-               value="{{_selectedStudent?.email}}" required>
+               value="{{_selectedStudent?.email}}" [(ngModel)]="_updatedStudent.email" required>
         <input type="text" name="password" class="form-control" placeholder="Password"
-               value="{{_selectedStudent?.password}}" required>
+               value="{{_selectedStudent?.password}}" [(ngModel)]="_updatedStudent.password" required>
       </form>
     </div>
 
     <div class="controls">
-      <button class="btn-primary" type="submit">Update</button>
+      <button class="btn-primary" type="submit" form="studentForm">Update</button>
     </div>
 
     <ng-container *ngIf="_selectedStudentCourses?.length; else noStudentCourses">
@@ -70,6 +72,30 @@
     <div class="controls">
       <button class="btn-primary">Add course</button>
       <button class="btn-light" (click)="_showDetailsPanel = false;">Close</button>
+    </div>
+  </app-details-panel>
+  <app-details-panel
+    [(visible)]="_showAddPanel"
+    [title]="'Add student'"
+  >
+    <div class="form">
+      <form class="form-col" action="#" (ngSubmit)="_addStudent()" id="addStudentForm">
+        <input type="text" name="name" class="form-control" placeholder="Name"
+               [(ngModel)]="_addedStudent.name" required autofocus>
+        <input type="text" name="lastName" class="form-control" placeholder="Last Name"
+               [(ngModel)]="_addedStudent.lastName" required>
+        <input type="text" name="middleName" class="form-control" placeholder="Middle name"
+               [(ngModel)]="_addedStudent.middleName" required>
+        <input type="text" name="email" class="form-control" placeholder="Email"
+               [(ngModel)]="_addedStudent.email" required>
+        <input type="text" name="password" class="form-control" placeholder="Password"
+               [(ngModel)]="_addedStudent.password" required>
+      </form>
+    </div>
+
+    <div class="controls">
+      <button class="btn-primary" type="submit" form="addStudentForm">Add</button>
+      <button class="btn-light" (click)="_showAddPanel = false;">Close</button>
     </div>
   </app-details-panel>
 </div>

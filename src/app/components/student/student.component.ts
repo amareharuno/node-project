@@ -14,11 +14,15 @@ export class StudentComponent implements OnInit {
 
   _students: Student[];
   _showDetailsPanel = false;
-
+  _showAddPanel = false;
   _selectedStudent: Student;
+  _addedStudent: Student;
+  _updatedStudent: Student;
   _selectedStudentCourses: Course[];
 
   constructor(private studentService: StudentService) {
+    this._updatedStudent = new Student();
+    this._addedStudent = new Student();
   }
 
   ngOnInit(): void {
@@ -37,14 +41,21 @@ export class StudentComponent implements OnInit {
   }
 
   private getStudentCourses(student: Student | number) {
-    // todo: uncomment later
-    // this.studentService.getStudentCourses(student)
-    //   .subscribe(courses => this._selectedStudentCourses = courses);
+    this.studentService.getStudentCourses(student)
+      .subscribe(courses => this._selectedStudentCourses = courses);
+  }
 
-    // stub todo: remove it when service will be available
-    const course: Course = new Course(11, 'CourseName', new Date(), new Date(), 1);
-    // this._selectedStudentCourses = [
-    //   course, course, course, course, course, course, course, course, course, course, course, course, course, course
-    // ];
+  _addStudent() {
+    this.studentService.addStudent(this._addedStudent).subscribe(() => this.getStudents());
+    this._showAddPanel = false;
+  }
+
+  _removeItem(student: Student | number, event: MouseEvent) {
+    this.studentService.deleteStudent(student).subscribe(() => this.getStudents());
+    event.stopPropagation();
+  }
+
+  _updateStudent() {
+    this.studentService.updateStudent(this._selectedStudent.id, this._updatedStudent).subscribe(() => this.getStudents());
   }
 }

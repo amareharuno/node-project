@@ -9,7 +9,9 @@
       <div class="entity-list__header__text">lastName</div>
       <div class="entity-list__header__text">email</div>
       <div class="entity-list__header__text">password</div>
-      <div class="entity-list__header__btn"></div>
+      <div class="entity-list__header__btn">
+        <button class="btn-light" (click)="_showAddPanel = true;">+</button>
+      </div>
     </div>
 
     <div class="entity-list__item"
@@ -23,7 +25,7 @@
       <div class="entity-list__item__text">{{teacher.email}}</div>
       <div class="entity-list__item__text">{{teacher.password}}</div>
       <div class="entity-list__item__btn">
-        <button class="btn-transparent" (click)="_removeItem(course)">Remove</button>
+        <button class="btn-transparent" (click)="_removeItem(teacher, $event)">Remove</button>
       </div>
     </div>
   </div>
@@ -37,24 +39,47 @@
     [title]="'Teacher details'"
   >
     <div class="form">
-      <form class="form-col" action="#">
+      <form class="form-col" action="#" (ngSubmit)="_updateTeacher()" id="teacherForm">
         <input type="text" name="name" class="form-control" placeholder="Name"
-               value="{{_clickedTeacher?.name}}" required autofocus>
+               value="{{_clickedTeacher?.name}}" [(ngModel)]="_updatedTeacher.name" required autofocus>
         <input type="text" name="lastName" class="form-control" placeholder="Last Name"
-               value="{{_clickedTeacher?.lastName}}" required>
+               value="{{_clickedTeacher?.lastName}}" [(ngModel)]="_updatedTeacher.lastName" required>
         <input type="text" name="middleName" class="form-control" placeholder="Middle name"
-               value="{{_clickedTeacher?.middleName}}" required>
+               value="{{_clickedTeacher?.middleName}}" [(ngModel)]="_updatedTeacher.middleName" required>
         <input type="text" name="email" class="form-control" placeholder="Email"
-               value="{{_clickedTeacher?.email}}" required>
+               value="{{_clickedTeacher?.email}}" [(ngModel)]="_updatedTeacher.email" required>
         <input type="text" name="password" class="form-control" placeholder="Password"
-               value="{{_clickedTeacher?.password}}" required>
+               value="{{_clickedTeacher?.password}}" [(ngModel)]="_updatedTeacher.password" required>
       </form>
     </div>
 
     <div class="controls">
-      <button class="btn-primary" type="submit">Update</button>
+      <button class="btn-primary" type="submit" form="teacherForm">Update</button>
       <button class="btn-light" (click)="_showDetailsPanel = false;">Close</button>
-      <!--<button class="btn-delete">Delete</button>-->
+    </div>
+  </app-details-panel>
+  <app-details-panel
+    [(visible)]="_showAddPanel"
+    [title]="'Add teacher'"
+  >
+    <div class="form">
+      <form class="form-col" action="#" (ngSubmit)="_addTeacher()" id="addTeacherForm">
+        <input type="text" name="name" class="form-control" placeholder="Name"
+               [(ngModel)]="_addedTeacher.name" required autofocus>
+        <input type="text" name="lastName" class="form-control" placeholder="Last Name"
+               [(ngModel)]="_addedTeacher.lastName" required>
+        <input type="text" name="middleName" class="form-control" placeholder="Middle name"
+               [(ngModel)]="_addedTeacher.middleName" required>
+        <input type="text" name="email" class="form-control" placeholder="Email"
+               [(ngModel)]="_addedTeacher.email" required>
+        <input type="text" name="password" class="form-control" placeholder="Password"
+               [(ngModel)]="_addedTeacher.password" required>
+      </form>
+    </div>
+
+    <div class="controls">
+      <button class="btn-primary" type="submit" form="addTeacherForm">Add</button>
+      <button class="btn-light" (click)="_showAddPanel = false;">Close</button>
     </div>
   </app-details-panel>
 </div>

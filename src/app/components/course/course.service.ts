@@ -58,9 +58,9 @@ export class CourseService {
   }
 
   /** PUT: update the hero on the server */
-  updateAddress(course: Course): Observable<Course> {
+  updateCourse(id: number, course: Course): Observable<Course> {
     return this.http
-      .put(this.courseUrl, course, httpOptions)
+      .put(`${this.courseUrl}/${id}`, course, httpOptions)
       .pipe(
         catchError(this.handleError<any>('updateCourse'))
       );
